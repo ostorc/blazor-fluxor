@@ -31,15 +31,16 @@ namespace Blazor.Fluxor.DependencyInjection
 				scanBlacklist: scanBlacklist,
 				scanWhitelist: scanWhitelist);
 
+			var usableCandidateTypes = allCandidateTypes.Where(t => !t.IsAbstract);
 
 			IEnumerable<DiscoveredReducerInfo> discoveredReducerInfos =
-				ReducersRegistration.DiscoverReducers(serviceCollection, allCandidateTypes);
+				ReducersRegistration.DiscoverReducers(serviceCollection, usableCandidateTypes);
 
 			IEnumerable<DiscoveredEffectInfo> discoveredEffectInfos =
-				EffectsRegistration.DiscoverEffects(serviceCollection, allCandidateTypes);
+				EffectsRegistration.DiscoverEffects(serviceCollection, usableCandidateTypes);
 
 			IEnumerable<DiscoveredFeatureInfo> discoveredFeatureInfos =
-				FeaturesRegistration.DiscoverFeatures(serviceCollection, allCandidateTypes, discoveredReducerInfos);
+				FeaturesRegistration.DiscoverFeatures(serviceCollection, usableCandidateTypes, discoveredReducerInfos);
 
 			RegisterStore(serviceCollection, discoveredFeatureInfos, discoveredEffectInfos);
 		}
