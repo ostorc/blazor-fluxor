@@ -4,7 +4,7 @@
 	/// Dispatching this action will navigate the browser to the specified URL
 	/// </summary>
 	/// <seealso cref="Microsoft.AspNetCore.Components.IUriHelper"/>
-	public class Go: IAction
+	public class Go
 	{
 		/// <summary>
 		/// The new address to navigate to

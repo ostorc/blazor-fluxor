@@ -48,10 +48,10 @@
 
 
 
-@functions {
-	protected override void OnInit()
+@code {
+	protected override void OnInitialized()
 	{
-		base.OnInit();
+		base.OnInitialized();
 		Dispatcher.Dispatch(new GetForecastDataAction());
 	}
 }

@@ -1,11 +1,9 @@
 ﻿using Blazor.Fluxor.ReduxDevTools.CallbackObjects;
-using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
-using System.Dynamic;
 using System.Linq;
-using System.Reflection;
+using System.Text.Json;
+using Json = System.Text.Json.JsonSerializer;
 
 namespace Blazor.Fluxor.ReduxDevTools
 {
@@ -17,6 +15,7 @@ namespace Blazor.Fluxor.ReduxDevTools
 		private int SequenceNumberOfCurrentState = 0;
 		private int SequenceNumberOfLatestState = 0;
 		private readonly ReduxDevToolsInterop ReduxDevToolsInterop;
+		private readonly JsonSerializerOptions SerializationOptions;
 
 		/// <summary>
 		/// Creates a new instance of the middleware
@@ -24,6 +23,10 @@ namespace Blazor.Fluxor.ReduxDevTools
 		public ReduxDevToolsMiddleware(ReduxDevToolsInterop reduxDevToolsInterop)
 		{
 			ReduxDevToolsInterop = reduxDevToolsInterop;
+			SerializationOptions = new JsonSerializerOptions {
+				PropertyNameCaseInsensitive = true,
+				WriteIndented = false
+			};
 			ReduxDevToolsInterop.JumpToState += OnJumpToState;
 			ReduxDevToolsInterop.Commit += OnCommit;
 		}
@@ -35,14 +38,14 @@ namespace Blazor.Fluxor.ReduxDevTools
 			ReduxDevToolsInterop.Init(GetState());
 		}
 
-		/// <see cref="IMiddleware.MayDispatchAction(IAction)"/>
-		public override bool MayDispatchAction(IAction action)
+		/// <see cref="IMiddleware.MayDispatchAction(object)"/>
+		public override bool MayDispatchAction(object action)
 		{
 			return SequenceNumberOfCurrentState == SequenceNumberOfLatestState;
 		}
 
-		/// <see cref="IMiddleware.AfterDispatch(IAction)"/>
-		public override void AfterDispatch(IAction action)
+		/// <see cref="IMiddleware.AfterDispatch(object)"/>
+		public override void AfterDispatch(object action)
 		{
 			ReduxDevToolsInterop.Dispatch(action, GetState());
 
@@ -54,7 +57,7 @@ namespace Blazor.Fluxor.ReduxDevTools
 
 		private IDictionary<string, object> GetState()
 		{
-			var state = (IDictionary<string, object>)new ExpandoObject();
+			var state = new Dictionary<string, object>();
 			foreach (IFeature feature in Store.Features.Values.OrderBy(x => x.GetName()))
 				state[feature.GetName()] = feature.GetState();
 			return state;
@@ -71,27 +74,18 @@ namespace Blazor.Fluxor.ReduxDevTools
 			SequenceNumberOfCurrentState = e.payload.actionId;
 			using (Store.BeginInternalMiddlewareChange())
 			{
-				var newFeatureStates = (IDictionary<string, object>)Json.Deserialize<object>(e.state);
+				var newFeatureStates = Json.Deserialize<Dictionary<string, object>>(e.state);
 				foreach (KeyValuePair<string, object> newFeatureState in newFeatureStates)
 				{
 					// Get the feature with the given name
 					if (!Store.Features.TryGetValue(newFeatureState.Key, out IFeature feature))
 						continue;
 
-					// Get the generic method of JsonUtil.Deserialize<> so we have the correct object type for the state
-					string deserializeMethodName = nameof(Json.Deserialize);
-					MethodInfo deserializeMethodInfo = typeof(Json)
-						.GetMethod(deserializeMethodName)
-						.GetGenericMethodDefinition()
-						.MakeGenericMethod(new Type[] { feature.GetStateType() });
-
-					// Get the state we were given as a json string
-					string serializedFeatureState = newFeatureState.Value?.ToString();
-					// Deserialize that json using the generic method, so we get an object of the correct type
-					object stronglyTypedFeatureState =
-						string.IsNullOrEmpty(serializedFeatureState)
-						? null
-						: deserializeMethodInfo.Invoke(null, new object[] { serializedFeatureState });
+					var serializedFeatureStateElement = (JsonElement)newFeatureState.Value;
+					object stronglyTypedFeatureState = Json.Deserialize(
+						json: serializedFeatureStateElement.ToString(),
+						returnType: feature.GetStateType(),
+						options: SerializationOptions);
 
 					// Now set the feature's state to the deserialized object
 					feature.RestoreState(stronglyTypedFeatureState);

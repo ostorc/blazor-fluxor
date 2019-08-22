@@ -3,7 +3,7 @@ using ReduxDevToolsIntegration.Shared;
 
 namespace ReduxDevToolsIntegration.Client.Store.FetchData
 {
-	public class GetForecastDataSuccessAction : IAction
+	public class GetForecastDataSuccessAction 
 	{
 		public WeatherForecast[] WeatherForecasts { get; private set; }
 

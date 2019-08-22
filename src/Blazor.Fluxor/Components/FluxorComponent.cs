@@ -14,9 +14,9 @@ namespace Blazor.Fluxor.Components
 		/// <summary>
 		/// Subscribes to state properties
 		/// </summary>
-		protected override void OnInit()
+		protected override void OnInitialized()
 		{
-			base.OnInit();
+			base.OnInitialized();
 			// Find all state properties
 			const BindingFlags bindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
 			IEnumerable<PropertyInfo> stateProperties = GetType().GetProperties(bindingFlags)

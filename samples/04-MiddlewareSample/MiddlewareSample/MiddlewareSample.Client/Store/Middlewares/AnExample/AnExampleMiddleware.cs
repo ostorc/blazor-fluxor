@@ -18,18 +18,18 @@ namespace MiddlewareSample.Client.Store.Middlewares.AnExample
 			base.AfterInitializeAllMiddlewares();
 		}
 
-		public override bool MayDispatchAction(IAction action)
+		public override bool MayDispatchAction(object action)
 		{
 			Console.WriteLine($"Action {action.GetType().Name} has been allowed to execute");
 			return true;
 		}
 
-		public override void BeforeDispatch(IAction action)
+		public override void BeforeDispatch(object action)
 		{
 			Console.WriteLine($"Action {action.GetType().Name} is about to be dispatched to all features");
 		}
 
-		public override void AfterDispatch(IAction action)
+		public override void AfterDispatch(object action)
 		{
 			Console.WriteLine($"Action {action.GetType().Name} has just been dispatched to all features");
 		}

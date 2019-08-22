@@ -3,7 +3,7 @@ using FlightFinder.Shared;
 
 namespace FlightFinder.Client.Store
 {
-	public class AddToShortlistAction: IAction
+	public class AddToShortlistAction
 	{
 		public readonly Itinerary Itinerary;
 

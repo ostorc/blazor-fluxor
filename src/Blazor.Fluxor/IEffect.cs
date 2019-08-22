@@ -15,13 +15,13 @@ namespace Blazor.Fluxor
 		/// </summary>
 		/// <param name="action">The action that was dispatched</param>
 		/// <param name="dispatcher">The dispatcher to use to trigger any additional actions</param>
-		Task HandleAsync(IAction action, IDispatcher dispatcher);
+		Task HandleAsync(object action, IDispatcher dispatcher);
 
 		/// <summary>
 		/// Indicates whether or not the effect should react to a specific action dispatched through the store
 		/// </summary>
 		/// <param name="action">The action that is being dispatched through the store</param>
-		/// <returns>True if the <see cref="HandleAsync(IAction, IDispatcher)"/> method should be called</returns>
-		bool ShouldReactToAction(IAction action);
+		/// <returns>True if the <see cref="HandleAsync(object, IDispatcher)"/> method should be called</returns>
+		bool ShouldReactToAction(object action);
 	}
 }

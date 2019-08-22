@@ -3,7 +3,7 @@ using FlightFinder.Shared;
 
 namespace FlightFinder.Client.Store
 {
-	public class RemoveFromShortlistAction : IAction
+	public class RemoveFromShortlistAction 
 	{
 		public readonly Itinerary Itinerary;
 

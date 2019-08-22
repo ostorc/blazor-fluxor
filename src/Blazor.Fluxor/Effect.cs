@@ -7,22 +7,21 @@ namespace Blazor.Fluxor
 	/// </summary>
 	/// <typeparam name="TTriggerAction"></typeparam>
 	public abstract class Effect<TTriggerAction> : IEffect
-		where TTriggerAction : IAction
 	{
 		/// <summary>
-		/// <see cref="IEffect.HandleAsync(IAction, IDispatcher)"/>
+		/// <see cref="IEffect.HandleAsync(object, IDispatcher)"/>
 		/// </summary>
 		protected abstract Task HandleAsync(TTriggerAction action, IDispatcher dispatcher);
 
 		/// <summary>
-		/// <see cref="IEffect.ShouldReactToAction(IAction)"/>
+		/// <see cref="IEffect.ShouldReactToAction(object)"/>
 		/// </summary>
-		public bool ShouldReactToAction(IAction action)
+		public bool ShouldReactToAction(object action)
 		{
 			return typeof(TTriggerAction).IsAssignableFrom(action.GetType());
 		}
 
-		Task IEffect.HandleAsync(IAction action, IDispatcher dispatcher)
+		Task IEffect.HandleAsync(object action, IDispatcher dispatcher)
 		{
 			return HandleAsync((TTriggerAction)action, dispatcher);
 		}

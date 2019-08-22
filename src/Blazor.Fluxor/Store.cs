@@ -22,7 +22,7 @@ namespace Blazor.Fluxor
 		private readonly List<IEffect> Effects = new List<IEffect>();
 		private readonly List<IMiddleware> Middlewares = new List<IMiddleware>();
 		private readonly List<IMiddleware> ReversedMiddlewares = new List<IMiddleware>();
-		private readonly Queue<IAction> QueuedActions = new Queue<IAction>();
+		private readonly Queue<object> QueuedActions = new Queue<object>();
 		private readonly TaskCompletionSource<bool> InitializedCompletionSource = new TaskCompletionSource<bool>();
 
 		private int BeginMiddlewareChangeCount;
@@ -49,8 +49,8 @@ namespace Blazor.Fluxor
 			FeaturesByName.Add(feature.GetName(), feature);
 		}
 
-		/// <see cref="IDispatcher.Dispatch(IAction)"/>
-		public void Dispatch(IAction action)
+		/// <see cref="IDispatcher.Dispatch(object)"/>
+		public void Dispatch(object action)
 		{
 			if (action == null)
 				throw new ArgumentNullException(nameof(action));
@@ -144,7 +144,7 @@ namespace Blazor.Fluxor
 			};
 		}
 
-		private void TriggerEffects(IAction action)
+		private void TriggerEffects(object action)
 		{
 			var effectsToTrigger = Effects.Where(x => x.ShouldReactToAction(action));
 			foreach (var effect in effectsToTrigger)
@@ -157,18 +157,18 @@ namespace Blazor.Fluxor
 			Middlewares.ForEach(x => x.AfterInitializeAllMiddlewares());
 		}
 
-		private void ExecuteMiddlewareBeforeDispatch(IAction actionAboutToBeDispatched)
+		private void ExecuteMiddlewareBeforeDispatch(object actionAboutToBeDispatched)
 		{
 			foreach (IMiddleware middleWare in Middlewares)
 				middleWare.BeforeDispatch(actionAboutToBeDispatched);
 		}
 
-		private void ExecuteMiddlewareAfterDispatch(IAction actionJustDispatched)
+		private void ExecuteMiddlewareAfterDispatch(object actionJustDispatched)
 		{
 			Middlewares.ForEach(x => x.AfterDispatch(actionJustDispatched));
 		}
 
-		private void NotifyFeatureOfDispatch(IFeature feature, IAction action)
+		private void NotifyFeatureOfDispatch(IFeature feature, object action)
 		{
 			string methodName = nameof(IFeature.ReceiveDispatchNotificationFromStore);
 			// We need the generic method for the feature instance
@@ -196,7 +196,7 @@ namespace Blazor.Fluxor
 			{
 				// We want the next action but we won't dequeue it because we use
 				// a non-empty queue as an indication that a Dispatch() loop is already in progress
-				IAction nextActionToDequeue = QueuedActions.Peek();
+				object nextActionToDequeue = QueuedActions.Peek();
 				// Only process the action if no middleware vetos it
 				if (Middlewares.All(x => x.MayDispatchAction(nextActionToDequeue)))
 				{

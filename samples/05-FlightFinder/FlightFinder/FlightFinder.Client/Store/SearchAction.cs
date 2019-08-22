@@ -3,7 +3,7 @@ using FlightFinder.Shared;
 
 namespace FlightFinder.Client.Store
 {
-	public class SearchAction: IAction
+	public class SearchAction
 	{
 		public readonly SearchCriteria SearchCriteria;
 

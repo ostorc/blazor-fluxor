@@ -15,6 +15,6 @@
 		/// effects (<see cref="IEffect"/>).
 		/// </remarks>
 		/// <param name="action">The action to dispatch to all features</param>
-		void Dispatch(IAction action);
+		void Dispatch(object action);
 	}
 }

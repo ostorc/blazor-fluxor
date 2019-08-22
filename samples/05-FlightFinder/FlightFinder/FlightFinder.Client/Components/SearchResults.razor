@@ -26,14 +26,14 @@
 				</ul>
 				<div class="price ml-3">
 					<h3>@item.Price.ToString("$0")</h3>
-					<button class="btn" onclick=@(() => AddToShortlist(item))>Add</button>
+					<button class="btn" @onclick=@(() => AddToShortlist(item))>Add</button>
 				</div>
 			</div>
 		}
 	}
 </div>
 
-@functions
+@code
 {
 	// Private state
 	private SortOrder chosenSortOrder;

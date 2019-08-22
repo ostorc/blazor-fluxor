@@ -11,7 +11,7 @@ namespace Blazor.Fluxor.UnitTests.MockFactories
 				.Setup(x => x.BeginInternalMiddlewareChange())
 				.Returns(new DisposableCallback(() => { }));
 			mock
-				.Setup(x => x.MayDispatchAction(It.IsAny<IAction>()))
+				.Setup(x => x.MayDispatchAction(It.IsAny<object>()))
 				.Returns(true);
 			return mock;
 		}

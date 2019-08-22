@@ -39,10 +39,10 @@ namespace Blazor.Fluxor
 
 		/// <summary>
 		/// Allows a feature to react to an action dispatched via the store. This should not be called by
-		/// consuming applications. Instead you should dispatch actions only via <see cref="IDispatcher.Dispatch(IAction)"/>
+		/// consuming applications. Instead you should dispatch actions only via <see cref="IDispatcher.Dispatch(object)"/>
 		/// </summary>
 		/// <param name="action">The action dispatched via the store</param>
-		void ReceiveDispatchNotificationFromStore(IAction action);
+		void ReceiveDispatchNotificationFromStore(object action);
 
 		/// <summary>
 		/// Registers a component to be re-rendered whenever the state changes

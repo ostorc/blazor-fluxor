@@ -10,9 +10,9 @@
 
 <p>Current count: @CounterState.Value.ClickCount</p>
 
-<button class="btn btn-primary" onclick="@IncrementCount">Click me</button>
+<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
-@functions {
+@code {
 	void IncrementCount()
 	{
 		Dispatcher.Dispatch(new IncrementCounterAction());

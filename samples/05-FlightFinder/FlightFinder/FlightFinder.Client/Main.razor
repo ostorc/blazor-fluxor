@@ -17,13 +17,13 @@
     <Shortlist />
 </div>
 
-@functions
+@code
 {
     public bool ShowShortlist { get; set; } = true;
 
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
-        base.OnInit();
+        base.OnInitialized();
         AppState.Subscribe(this);
     }
 }

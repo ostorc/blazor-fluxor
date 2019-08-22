@@ -9,7 +9,7 @@ namespace Blazor.Fluxor.ReduxDevTools
 #pragma warning restore IDE1006 // Naming Styles
 		public object Payload { get; }
 
-		public ActionInfo(IAction action)
+		public ActionInfo(object action)
 		{
 			if (action == null)
 				throw new ArgumentNullException(nameof(action));

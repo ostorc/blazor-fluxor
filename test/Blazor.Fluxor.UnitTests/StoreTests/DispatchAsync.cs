@@ -93,7 +93,7 @@ namespace Blazor.Fluxor.UnitTests.StoreTests
 				var mockFeature = MockFeatureFactory.Create();
 				var actionToEmit1 = new TestActionFromEffect1();
 				var actionToEmit2 = new TestActionFromEffect2();
-				var actionsToEmit = new IAction[] { actionToEmit1, actionToEmit2 };
+				var actionsToEmit = new object[] { actionToEmit1, actionToEmit2 };
 				var subject = new Store(BrowserInteropStub);
 				subject.AddFeature(mockFeature.Object);
 				subject.AddEffect(new EffectThatEmitsActions<TestAction>(actionsToEmit));
@@ -112,11 +112,11 @@ namespace Blazor.Fluxor.UnitTests.StoreTests
 			{
 				var mockIncompatibleEffect = new Mock<IEffect>();
 				mockIncompatibleEffect
-					.Setup(x => x.ShouldReactToAction(It.IsAny<IAction>()))
+					.Setup(x => x.ShouldReactToAction(It.IsAny<object>()))
 					.Returns(false);
 				var mockCompatibleEffect = new Mock<IEffect>();
 				mockCompatibleEffect
-					.Setup(x => x.ShouldReactToAction(It.IsAny<IAction>()))
+					.Setup(x => x.ShouldReactToAction(It.IsAny<object>()))
 					.Returns(true);
 
 				var subject = new Store(BrowserInteropStub);

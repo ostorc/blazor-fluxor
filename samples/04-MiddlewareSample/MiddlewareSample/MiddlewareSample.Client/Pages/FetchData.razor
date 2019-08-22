@@ -19,7 +19,10 @@
 
 @if (FetchDataState.Value.IsLoading)
 {
-	<p><em>Loading...</em></p>
+	<p>
+		<em>Loading...</em>
+		<strong>Includes a 2 second delay, so you can see it happen.</strong>
+	</p>
 }
 @if (FetchDataState.Value.Forecasts != null)
 {
@@ -46,10 +49,10 @@
 	</table>
 }
 
-@functions {
-	protected override void OnInit()
+@code {
+	protected override void OnInitialized()
 	{
-		base.OnInit();
+		base.OnInitialized();
 		Dispatcher.Dispatch(new GetForecastDataAction());
 	}
 }

@@ -6,12 +6,11 @@
 	/// <typeparam name="TState">The state that this reducer works with</typeparam>
 	/// <typeparam name="TAction">The action type this reducer responds to</typeparam>
 	public abstract class Reducer<TState, TAction> : IReducer<TState>
-		where TAction : IAction
 	{
 		/// <summary>
-		/// <see cref="IReducer{TState}.ShouldReduceStateForAction(IAction)"/>
+		/// <see cref="IReducer{TState}.ShouldReduceStateForAction(object)"/>
 		/// </summary>
-		public bool ShouldReduceStateForAction(IAction action) => action is TAction;
+		public bool ShouldReduceStateForAction(object action) => action is TAction;
 
 		/// <summary>
 		/// Reduces state in reaction to the action dispatched via the store.
@@ -21,6 +20,6 @@
 		/// <returns>The new state</returns>
 		public abstract TState Reduce(TState state, TAction action);
 
-		TState IReducer<TState>.Reduce(TState state, IAction action) => Reduce(state, (TAction)action);
+		TState IReducer<TState>.Reduce(TState state, object action) => Reduce(state, (TAction)action);
 	}
 }

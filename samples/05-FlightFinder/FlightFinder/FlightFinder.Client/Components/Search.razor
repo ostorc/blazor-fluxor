@@ -52,7 +52,7 @@
 			</select>
 		</div>
 		<div class="ml-auto">
-			<button onclick=@(() => OnSearch()) type="button" class="btn btn-danger px-5">
+			<button @onclick=@(() => OnSearch()) type="button" class="btn btn-danger px-5">
 				Search ➝
 			</button>
 		</div>
@@ -60,7 +60,7 @@
 </div>
 <AirportsList />
 
-@functions
+@code
 {
 	void OnSearch()
 	{

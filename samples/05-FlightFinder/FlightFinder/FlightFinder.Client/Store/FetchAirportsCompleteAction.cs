@@ -3,7 +3,7 @@ using FlightFinder.Shared;
 
 namespace FlightFinder.Client.Store
 {
-	public class FetchAirportsCompleteAction : IAction
+	public class FetchAirportsCompleteAction 
 	{
 		public readonly Airport[] Airports;
 

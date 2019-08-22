@@ -4,7 +4,7 @@ using FlightFinder.Shared;
 
 namespace FlightFinder.Client.Store
 {
-	public class SearchCompleteAction : IAction
+	public class SearchCompleteAction 
 	{
 		public readonly Itinerary[] SearchResults;
 

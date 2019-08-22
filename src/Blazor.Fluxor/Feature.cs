@@ -66,8 +66,8 @@ namespace Blazor.Fluxor
 			Reducers.Add(reducer);
 		}
 
-		/// <see cref="IFeature.ReceiveDispatchNotificationFromStore(IAction)"/>
-		public virtual void ReceiveDispatchNotificationFromStore(IAction action)
+		/// <see cref="IFeature.ReceiveDispatchNotificationFromStore(object)"/>
+		public virtual void ReceiveDispatchNotificationFromStore(object action)
 		{
 			if (action == null)
 				throw new ArgumentNullException(nameof(action));

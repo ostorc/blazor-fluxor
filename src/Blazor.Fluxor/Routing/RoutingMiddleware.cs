@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Routing;
 
 namespace Blazor.Fluxor.Routing
 {
@@ -23,6 +24,7 @@ namespace Blazor.Fluxor.Routing
 			UriHelper.OnLocationChanged += OnLocationChanged;
 		}
 
+
 		/// <see cref="IMiddleware.Initialize(IStore)"/>
 		public override void Initialize(IStore store)
 		{
@@ -38,11 +40,11 @@ namespace Blazor.Fluxor.Routing
 				UriHelper.NavigateTo(Feature.State.Uri);
 		}
 
-		private void OnLocationChanged(object sender, string e)
+		private void OnLocationChanged(object sender, LocationChangedEventArgs e)
 		{
-			string fullUri = UriHelper.ToAbsoluteUri(e).ToString();
+			string fullUri = UriHelper.ToAbsoluteUri(e.Location).ToString();
 			if (Store != null && !IsInsideMiddlewareChange && fullUri != Feature.State.Uri)
-				Store.Dispatch(new Go(e));
+				Store.Dispatch(new Go(e.Location));
 		}
 	}
 }

@@ -5,7 +5,7 @@
 	/// action dispatched, although it might not be because Middlewares may dispatch
 	/// actions earlier on.
 	/// </summary>
-	public class StoreInitializedAction : IAction
+	public class StoreInitializedAction 
 	{
 		internal StoreInitializedAction() { }
 	}

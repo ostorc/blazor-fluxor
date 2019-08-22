@@ -2,7 +2,7 @@
 
 namespace ReduxDevToolsIntegration.Client.Store.FetchData
 {
-	public class GetForecastDataAction: IAction
+	public class GetForecastDataAction
 	{
 	}
 }

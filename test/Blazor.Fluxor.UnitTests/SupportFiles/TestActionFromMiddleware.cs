@@ -1,6 +1,6 @@
 ﻿namespace Blazor.Fluxor.UnitTests.SupportFiles
 {
-	public class TestActionFromMiddleware: IAction
+	public class TestActionFromMiddleware
 	{
 	}
 }

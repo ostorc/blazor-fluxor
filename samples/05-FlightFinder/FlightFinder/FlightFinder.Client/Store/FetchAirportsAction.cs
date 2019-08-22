@@ -2,7 +2,7 @@
 
 namespace FlightFinder.Client.Store
 {
-	public class FetchAirportsAction: IAction
+	public class FetchAirportsAction
 	{
 	}
 }

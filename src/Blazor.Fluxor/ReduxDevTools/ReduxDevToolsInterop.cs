@@ -3,6 +3,7 @@ using Microsoft.JSInterop;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Json = System.Text.Json.JsonSerializer;
 
 namespace Blazor.Fluxor.ReduxDevTools
 {
@@ -39,7 +40,7 @@ namespace Blazor.Fluxor.ReduxDevTools
 			InvokeFluxorDevToolsMethod<object>(ToJsInitMethodName, state);
 		}
 
-		internal void Dispatch(IAction action, IDictionary<string, object> state)
+		internal void Dispatch(object action, IDictionary<string, object> state)
 		{
 			InvokeFluxorDevToolsMethod<object>(ToJsDispatchMethodName, new ActionInfo(action), state);
 		}

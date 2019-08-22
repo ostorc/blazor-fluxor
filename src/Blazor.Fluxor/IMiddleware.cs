@@ -33,19 +33,19 @@ namespace Blazor.Fluxor
 		/// </summary>
 		/// <param name="action">The action to be dispatched</param>
 		/// <returns>True if the action may proceed, False if it should be prevented</returns>
-		bool MayDispatchAction(IAction action);
+		bool MayDispatchAction(object action);
 
 		/// <summary>
 		/// Called before each action dispatched
 		/// </summary>
 		/// <param name="action">The action being dispatched</param>
-		void BeforeDispatch(IAction action);
+		void BeforeDispatch(object action);
 
 		/// <summary>
 		/// Called after each action dispatched
 		/// </summary>
 		/// <param name="action">The action that has just been dispatched</param>
-		void AfterDispatch(IAction action);
+		void AfterDispatch(object action);
 
 		/// <summary>
 		/// This should only be called via <see cref="IStore.BeginInternalMiddlewareChange"/>.

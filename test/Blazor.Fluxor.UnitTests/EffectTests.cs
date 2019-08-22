@@ -40,10 +40,10 @@ namespace Blazor.Fluxor.UnitTests
 			}
 		}
 
-		public class ActionForEffect : IAction { }
+		public class ActionForEffect  { }
 		public class ActionThatQualifiesViaInheritance : ActionForEffect { }
-		public class ActionNotForThisEffect : IAction { }
-		public interface IInterfaceForEffect : IAction { }
+		public class ActionNotForThisEffect  { }
+		public interface IInterfaceForEffect  { }
 		public class ActionThatQualifiesViaInterface : IInterfaceForEffect { }
 
 	}

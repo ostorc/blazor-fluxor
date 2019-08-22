@@ -4,17 +4,16 @@ using System.Threading.Tasks;
 namespace Blazor.Fluxor.UnitTests.SupportFiles
 {
 	public class EffectThatEmitsActions<TTriggerAction> : Effect<TTriggerAction>
-		where TTriggerAction: IAction
 	{
-		public readonly IAction[] ActionsToEmit;
+		public readonly object[] ActionsToEmit;
 
-		public EffectThatEmitsActions(IAction[] actionsToEmit)
+		public EffectThatEmitsActions(object[] actionsToEmit)
 		{
-			ActionsToEmit = actionsToEmit ?? Array.Empty<IAction>();
+			ActionsToEmit = actionsToEmit ?? Array.Empty<object>();
 		}
 		protected override Task HandleAsync(TTriggerAction action, IDispatcher dispatcher)
 		{
-			foreach (IAction actionToEmit in ActionsToEmit)
+			foreach (object actionToEmit in ActionsToEmit)
 				dispatcher.Dispatch(actionToEmit);
 			return Task.CompletedTask;
 		}

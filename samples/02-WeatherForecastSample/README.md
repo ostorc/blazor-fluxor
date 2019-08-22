@@ -49,7 +49,7 @@ namespace WeatherForecastSample.Client.Store.FetchData
 ```
   
 ## Creating the action that triggers a data request to the HTTP server
-1. In the `Store\FetchData` folder create a class in that folder named `GetForecastDataAction.cs`. This class can remain empty, but it must implement the interface `IAction`.
+1. In the `Store\FetchData` folder create a class in that folder named `GetForecastDataAction.cs`, this class can remain empty.
 2. When this action is dispatched through the store we want to clear out any previous state and set IsLoading to true. To do this create a class `GetForecastDataActionReducer.cs` with the following code
 ```c#
 using Blazor.Fluxor;
@@ -104,12 +104,12 @@ We now need to change the rest of the page in the following ways
 6. Look for the `@foreach` statement and change it to `@foreach (var forecast in FetchDataState.Value.Forecasts)`
 
 ## Dispatching the action when the page loads
-The code at the bottom of the `FetchData.razor` page calls out to a server. We want to move this code out to an effect that is triggered by the `GetForecastDataAction`. So we need to change the code in the `OnInitAsync` method to the following
+The code at the bottom of the `FetchData.razor` page calls out to a server. We want to move this code out to an effect that is triggered by the `GetForecastDataAction`. So we need to change the code in the `OnInitializedAsync` method to the following
 ```c#
 @functions {
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
-        base.OnInit();
+        base.OnInitialized();
         Dispatcher.Dispatch(new GetForecastDataAction());
     }
 }
@@ -166,9 +166,9 @@ The entirety of the `FetchData.razor` file should look like this
 
 
 @functions {
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
-        base.OnInit();
+        base.OnInitialized();
         Dispatcher.Dispatch(new GetForecastDataAction());
     }
 }
@@ -236,7 +236,7 @@ using Blazor.Fluxor;
 
 namespace WeatherForecastSample.Client.Store.FetchData
 {
-	public class GetForecastDataFailedAction : IAction
+	public class GetForecastDataFailedAction
 	{
 		public string ErrorMessage { get; private set; }
 
@@ -272,7 +272,7 @@ using WeatherForecastSample.Shared;
 
 namespace WeatherForecastSample.Client.Store.FetchData
 {
-	public class GetForecastDataSuccessAction : IAction
+	public class GetForecastDataSuccessAction
 	{
 		public WeatherForecast[] WeatherForecasts { get; private set; }
 
@@ -319,9 +319,9 @@ In more complex applications you may need to descend your page from another comp
 
 ```c#
 @functions {
-    protected override void OnInit()
+    protected override void OnInitialized()
     {
-        base.OnInit();
+        base.OnInitialized();
         FetchDataState.Subscribe(this);
     }
 }

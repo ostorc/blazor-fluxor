@@ -4,10 +4,11 @@ namespace ReduxDevToolsIntegration.Client.Store.Counter
 {
 	public class CounterState
 	{
-		public int ClickCount { get; private set; } 
+		//TODO: Private setter when JSON supports it
+		public int ClickCount { get; set; }
 
-		// Required for deserialisation
-		private CounterState() { }
+		[Obsolete("Used for deserialization only")]
+		public CounterState() { }
 
 		public CounterState(int clickCount)
 		{
