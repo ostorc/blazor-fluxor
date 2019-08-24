@@ -19,6 +19,7 @@ namespace Blazor.Fluxor.DependencyInjection
 
 			IEnumerable<Type> allCandidateTypes = assembliesToScan.SelectMany(x => x.Assembly.GetTypes())
 				.Union(scanWhitelist.SelectMany(x => x.Assembly.GetTypes()))
+				.Where(t => !t.IsAbstract)
 				.Distinct();
 			IEnumerable<Assembly> allCandidateAssemblies = assembliesToScan.Select(x => x.Assembly)
 				.Union(scanWhitelist.Select(x => x.Assembly))
@@ -31,16 +32,15 @@ namespace Blazor.Fluxor.DependencyInjection
 				scanBlacklist: scanBlacklist,
 				scanWhitelist: scanWhitelist);
 
-			var usableCandidateTypes = allCandidateTypes.Where(t => !t.IsAbstract);
 
 			IEnumerable<DiscoveredReducerInfo> discoveredReducerInfos =
-				ReducersRegistration.DiscoverReducers(serviceCollection, usableCandidateTypes);
+				ReducersRegistration.DiscoverReducers(serviceCollection, allCandidateTypes);
 
 			IEnumerable<DiscoveredEffectInfo> discoveredEffectInfos =
-				EffectsRegistration.DiscoverEffects(serviceCollection, usableCandidateTypes);
+				EffectsRegistration.DiscoverEffects(serviceCollection, allCandidateTypes);
 
 			IEnumerable<DiscoveredFeatureInfo> discoveredFeatureInfos =
-				FeaturesRegistration.DiscoverFeatures(serviceCollection, usableCandidateTypes, discoveredReducerInfos);
+				FeaturesRegistration.DiscoverFeatures(serviceCollection, allCandidateTypes, discoveredReducerInfos);
 
 			RegisterStore(serviceCollection, discoveredFeatureInfos, discoveredEffectInfos);
 		}
