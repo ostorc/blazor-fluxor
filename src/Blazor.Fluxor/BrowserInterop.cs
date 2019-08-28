@@ -22,13 +22,7 @@ namespace Blazor.Fluxor
 		{
 			string assemblyName = typeof(BrowserInterop).Assembly.GetName().Name;
 
-			return $@"
-setTimeout(function() {{
-	if (window.DotNet) {{
-		DotNet.invokeMethodAsync('{assemblyName}', '{OnPageLoadedId}');
-	}}
-}}, 0);
-";
+			return $@"DotNet.invokeMethodAsync('{assemblyName}', '{OnPageLoadedId}');";
 		}
 
 		/// <summary>

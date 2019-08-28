@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using System.Threading.Tasks;
 using Blazor.Fluxor.Services;
 using Microsoft.AspNetCore.Components;
@@ -125,21 +126,29 @@ namespace Blazor.Fluxor
 		{
 			return (RenderTreeBuilder renderer) =>
 			{
-				int sequence = 0;
-				foreach (IMiddleware middleware in Middlewares)
+				var scriptsBuilder = new StringBuilder();
+				scriptsBuilder.AppendLine("if (window.DotNet) {");
 				{
-					sequence++;
-					string middlewareScript = middleware.GetClientScripts();
-					if (middlewareScript != null)
+					scriptsBuilder.AppendLine("setTimeout(function() {");
 					{
-						renderer.OpenElement(sequence, "script");
-						renderer.AddMarkupContent(sequence, $"// Middleware scripts: {middleware.GetType().FullName}\r\n{middlewareScript}");
-						renderer.CloseElement();
+						foreach (IMiddleware middleware in Middlewares)
+						{
+							string middlewareScript = middleware.GetClientScripts();
+							if (middlewareScript != null)
+							{
+								scriptsBuilder.AppendLine($"// Middleware scripts: {middleware.GetType().FullName}");
+								scriptsBuilder.AppendLine($"{middlewareScript}");
+							}
+						}
+						scriptsBuilder.AppendLine("//Fluxor");
+						scriptsBuilder.AppendLine(GetClientScripts());
 					}
+					scriptsBuilder.AppendLine("}, 0);"); // End of setTimeout
 				}
+				scriptsBuilder.AppendLine("}");
 
-				renderer.OpenElement(sequence++, "script");
-				renderer.AddMarkupContent(sequence, GetClientScripts());
+				renderer.OpenElement(1, "script");
+				renderer.AddMarkupContent(2, scriptsBuilder.ToString());
 				renderer.CloseElement();
 			};
 		}

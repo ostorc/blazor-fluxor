@@ -20,6 +20,13 @@ More sample projects will be added as the framework develops.
   - [Blazor Flight Finder] - A conversion of the official Blazor `Flight Finder` demo.
 
 ## What's new
+### New in 0.29.0
+ - Fixed a harmless null reference error when running server-side
+ - Fixed FlightFinder sampl's UI and binding
+ - TypeExtensions.GetNamespace extension method removed in favor of Type.Namespace
+ - Fixed bug that caused an error when the project contained an abstract class that implements a Fluxor interface
+### New in 0.28.0
+ - Added a StateChanged event to IFeature<T> and IState<T>
 ### New in 0.27.0
  - Update to Blazor preview 8
 ### New in 0.26.0

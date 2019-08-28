@@ -62,7 +62,7 @@ namespace Blazor.Fluxor
 		/// <returns>A disposable that should have Dispose() called on to indicate the internal change is complete</returns>
 		/// <see cref="Middleware.IsInsideMiddlewareChange"/>
 		/// <seealso cref="ReduxDevTools.ReduxDevToolsMiddleware.OnJumpToState(object, ReduxDevTools.CallbackObjects.JumpToStateCallback)"/>
-		/// <seealso cref="Routing.RoutingMiddleware.OnLocationChanged(object, string)"/>
+		/// <seealso cref="Routing.RoutingMiddleware.OnLocationChanged(object, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs)"/>
 		IDisposable BeginInternalMiddlewareChange();
 
 		/// <summary>

@@ -103,7 +103,6 @@ window.{FluxorDevToolsId} = new (function() {{
 				const messageAsJson = JSON.stringify(message);
 				DotNet.invokeMethodAsync('{assemblyName}', '{DevToolsCallbackId}', messageAsJson); 
 			}});
-
 		}}
 
 		this.{ToJsInitMethodName} = function(state) {{

@@ -1,5 +1,4 @@
-﻿using Blazor.Fluxor.Extensions;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -11,7 +10,7 @@ namespace Blazor.Fluxor.DependencyInjection.DependencyScanners
 		{
 			return assembliesToScan
 				.SelectMany(x => x.GetTypes().Where(t => t.GetInterfaces().Any(i => i == typeof(IMiddleware))))
-				.Select(x => new AssemblyScanSettings(x.Assembly, x.GetNamespace()))
+				.Select(x => new AssemblyScanSettings(x.Assembly, x.Namespace))
 				.Distinct();
 		}
 	}

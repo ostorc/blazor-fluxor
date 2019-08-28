@@ -27,5 +27,9 @@ namespace Blazor.Fluxor
 		/// Returns the current state of the feature
 		/// </summary>
 		TState Value { get; }
+		/// <summary>
+		/// Event that is executed whenever the state changes
+		/// </summary>
+		event EventHandler<TState> StateChanged;
 	}
 }

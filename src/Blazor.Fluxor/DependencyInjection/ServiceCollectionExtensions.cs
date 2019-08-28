@@ -1,5 +1,4 @@
 ﻿using Blazor.Fluxor.DependencyInjection;
-using Blazor.Fluxor.Extensions;
 using Blazor.Fluxor.Services;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -44,7 +43,7 @@ namespace Blazor.Fluxor
 				serviceCollection.AddScoped(middlewareType);
 
 			IEnumerable<AssemblyScanSettings> scanWhitelist = Options.MiddlewareTypes
-				.Select(t => new AssemblyScanSettings(t.Assembly, t.GetNamespace()));
+				.Select(t => new AssemblyScanSettings(t.Assembly, t.Namespace));
 
 			// Scan for features and effects
 			if (Options.DependencyInjectionEnabled)
