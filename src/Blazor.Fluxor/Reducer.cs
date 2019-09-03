@@ -15,9 +15,9 @@
 		/// <summary>
 		/// Reduces state in reaction to the action dispatched via the store.
 		/// </summary>
-		/// <param name="state">The state type this reducer handles</param>
-		/// <param name="action">The action type this reducer handles</param>
-		/// <returns>The new state</returns>
+		/// <param name="state">The current state</param>
+		/// <param name="action">The action dispatched via the store</param>
+		/// <returns>The new state based on the current state + the changes the action should cause</returns>
 		public abstract TState Reduce(TState state, TAction action);
 
 		TState IReducer<TState>.Reduce(TState state, object action) => Reduce(state, (TAction)action);

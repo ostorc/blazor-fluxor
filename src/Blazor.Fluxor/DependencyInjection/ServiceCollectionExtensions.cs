@@ -42,7 +42,7 @@ namespace Blazor.Fluxor
 			foreach (Type middlewareType in Options.MiddlewareTypes)
 				serviceCollection.AddScoped(middlewareType);
 
-			IEnumerable<AssemblyScanSettings> scanWhitelist = Options.MiddlewareTypes
+			IEnumerable<AssemblyScanSettings> scanIncludeList = Options.MiddlewareTypes
 				.Select(t => new AssemblyScanSettings(t.Assembly, t.Namespace));
 
 			// Scan for features and effects
@@ -52,7 +52,7 @@ namespace Blazor.Fluxor
 				DependencyScanner.Scan(
 					serviceCollection: serviceCollection,
 					assembliesToScan: Options.DependencyInjectionAssembliesToScan,
-					scanWhitelist: scanWhitelist);
+					scanIncludeList: scanIncludeList);
 				serviceCollection.AddScoped(typeof(IState<>), typeof(State<>));
 			}
 

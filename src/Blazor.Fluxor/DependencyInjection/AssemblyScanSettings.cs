@@ -22,11 +22,11 @@ namespace Blazor.Fluxor.DependencyInjection
 			Namespace = @namespace;
 		}
 
-		public static IEnumerable<Type> Filter(IEnumerable<Type> types, IEnumerable<AssemblyScanSettings> scanBlacklist, 
-			IEnumerable<AssemblyScanSettings> scanWhitelist)
+		public static IEnumerable<Type> Filter(IEnumerable<Type> types, IEnumerable<AssemblyScanSettings> scanExcludeList, 
+			IEnumerable<AssemblyScanSettings> scanIncludeList)
 		{
 			return types
-				.Where(t => scanWhitelist.Any(wl => wl.Matches(t)) || !scanBlacklist.Any(bl => bl.Matches(t)));
+				.Where(t => scanIncludeList.Any(wl => wl.Matches(t)) || !scanExcludeList.Any(bl => bl.Matches(t)));
 		}
 
 		public override bool Equals(object obj)

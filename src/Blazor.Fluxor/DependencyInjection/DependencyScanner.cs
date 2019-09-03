@@ -11,26 +11,26 @@ namespace Blazor.Fluxor.DependencyInjection
 	internal static class DependencyScanner
 	{
 		internal static void Scan(this IServiceCollection serviceCollection,
-			IEnumerable<AssemblyScanSettings> assembliesToScan, IEnumerable<AssemblyScanSettings> scanWhitelist)
+			IEnumerable<AssemblyScanSettings> assembliesToScan, IEnumerable<AssemblyScanSettings> scanIncludeList)
 		{
 			if (assembliesToScan == null || assembliesToScan.Count() == 0)
 				throw new ArgumentNullException(nameof(assembliesToScan));
-			scanWhitelist = scanWhitelist ?? new List<AssemblyScanSettings>();
+			scanIncludeList = scanIncludeList ?? new List<AssemblyScanSettings>();
 
 			IEnumerable<Type> allCandidateTypes = assembliesToScan.SelectMany(x => x.Assembly.GetTypes())
-				.Union(scanWhitelist.SelectMany(x => x.Assembly.GetTypes()))
+				.Union(scanIncludeList.SelectMany(x => x.Assembly.GetTypes()))
 				.Where(t => !t.IsAbstract)
 				.Distinct();
 			IEnumerable<Assembly> allCandidateAssemblies = assembliesToScan.Select(x => x.Assembly)
-				.Union(scanWhitelist.Select(x => x.Assembly))
+				.Union(scanIncludeList.Select(x => x.Assembly))
 				.Distinct();
 
-			IEnumerable<AssemblyScanSettings> scanBlacklist =
+			IEnumerable<AssemblyScanSettings> scanExcludeList =
 				MiddlewareScanner.FindMiddlewareLocations(allCandidateAssemblies);
 			allCandidateTypes = AssemblyScanSettings.Filter(
 				types: allCandidateTypes,
-				scanBlacklist: scanBlacklist,
-				scanWhitelist: scanWhitelist);
+				scanExcludeList: scanExcludeList,
+				scanIncludeList: scanIncludeList);
 
 
 			IEnumerable<DiscoveredReducerInfo> discoveredReducerInfos =

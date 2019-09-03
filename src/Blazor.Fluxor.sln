@@ -50,11 +50,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReduxDevToolsIntegration.Cl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReduxDevToolsIntegration.Shared", "..\samples\03-ReduxDevToolsIntegration\ReduxDevToolsIntegration\ReduxDevToolsIntegration.Shared\ReduxDevToolsIntegration.Shared.csproj", "{484C7567-587A-43B9-9AF0-1C5E147E4A55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiddlewareSample.Server", "..\samples\04-MiddlewareSample\MiddlewareSample\MiddlewareSample.Server\MiddlewareSample.Server.csproj", "{DDC89ED4-A0DE-4164-8B53-D4EDFFE3181B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiddlewareSample.Server", "..\samples\04-MiddlewareSample\MiddlewareSample\MiddlewareSample.Server\MiddlewareSample.Server.csproj", "{DDC89ED4-A0DE-4164-8B53-D4EDFFE3181B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiddlewareSample.Client", "..\samples\04-MiddlewareSample\MiddlewareSample\MiddlewareSample.Client\MiddlewareSample.Client.csproj", "{A317DEF8-B9DC-4B5B-B450-8C9C6F33BD50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiddlewareSample.Client", "..\samples\04-MiddlewareSample\MiddlewareSample\MiddlewareSample.Client\MiddlewareSample.Client.csproj", "{A317DEF8-B9DC-4B5B-B450-8C9C6F33BD50}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiddlewareSample.Shared", "..\samples\04-MiddlewareSample\MiddlewareSample\MiddlewareSample.Shared\MiddlewareSample.Shared.csproj", "{B3D11A9E-AD0C-4FE3-81EA-9AD4389737E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiddlewareSample.Shared", "..\samples\04-MiddlewareSample\MiddlewareSample\MiddlewareSample.Shared\MiddlewareSample.Shared.csproj", "{B3D11A9E-AD0C-4FE3-81EA-9AD4389737E6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "06-MultiActionReducer sample", "06-MultiActionReducer sample", "{736A049B-EBC2-4555-BC22-233B6272FEC6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiActionReducerSample.Shared", "..\samples\06-MultiActionReducerSample\MultiActionReducerSample\MultiActionReducerSample.Shared\MultiActionReducerSample.Shared.csproj", "{73FC7173-865F-4DF6-BCFC-CC0D690B8041}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiActionReducerSample.Client", "..\samples\06-MultiActionReducerSample\MultiActionReducerSample\MultiActionReducerSample.Client\MultiActionReducerSample.Client.csproj", "{EA7E076D-2387-41AA-B1EF-8EE1F2C78465}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MultiActionReducerSample.Server", "..\samples\06-MultiActionReducerSample\MultiActionReducerSample\MultiActionReducerSample.Server\MultiActionReducerSample.Server.csproj", "{79D482F7-1195-4E46-AF72-62C788ECB531}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -130,6 +138,18 @@ Global
 		{B3D11A9E-AD0C-4FE3-81EA-9AD4389737E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3D11A9E-AD0C-4FE3-81EA-9AD4389737E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3D11A9E-AD0C-4FE3-81EA-9AD4389737E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{73FC7173-865F-4DF6-BCFC-CC0D690B8041}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{73FC7173-865F-4DF6-BCFC-CC0D690B8041}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{73FC7173-865F-4DF6-BCFC-CC0D690B8041}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{73FC7173-865F-4DF6-BCFC-CC0D690B8041}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA7E076D-2387-41AA-B1EF-8EE1F2C78465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA7E076D-2387-41AA-B1EF-8EE1F2C78465}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA7E076D-2387-41AA-B1EF-8EE1F2C78465}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA7E076D-2387-41AA-B1EF-8EE1F2C78465}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79D482F7-1195-4E46-AF72-62C788ECB531}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79D482F7-1195-4E46-AF72-62C788ECB531}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79D482F7-1195-4E46-AF72-62C788ECB531}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79D482F7-1195-4E46-AF72-62C788ECB531}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -156,6 +176,10 @@ Global
 		{DDC89ED4-A0DE-4164-8B53-D4EDFFE3181B} = {415FF6D9-06F9-44DD-BD46-5857F8B868C4}
 		{A317DEF8-B9DC-4B5B-B450-8C9C6F33BD50} = {415FF6D9-06F9-44DD-BD46-5857F8B868C4}
 		{B3D11A9E-AD0C-4FE3-81EA-9AD4389737E6} = {415FF6D9-06F9-44DD-BD46-5857F8B868C4}
+		{736A049B-EBC2-4555-BC22-233B6272FEC6} = {1A6663AC-4F1F-40AD-8D03-0B0977ED466D}
+		{73FC7173-865F-4DF6-BCFC-CC0D690B8041} = {736A049B-EBC2-4555-BC22-233B6272FEC6}
+		{EA7E076D-2387-41AA-B1EF-8EE1F2C78465} = {736A049B-EBC2-4555-BC22-233B6272FEC6}
+		{79D482F7-1195-4E46-AF72-62C788ECB531} = {736A049B-EBC2-4555-BC22-233B6272FEC6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B1F2E0DF-C651-48A3-83E3-3B77D34EC3A2}

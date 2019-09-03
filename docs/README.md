@@ -18,8 +18,13 @@ More sample projects will be added as the framework develops.
   - [Redux dev tools integration] - Demonstrates how to enable debugger integration for the [Redux dev tools] Chrome plugin.
   - [Custom Middleware] - Demonstrates how to create custom Middleware to intercept actions etc.
   - [Blazor Flight Finder] - A conversion of the official Blazor `Flight Finder` demo.
+  - [MultiActionReducer sample] - A sample demonstrating how to implement multiple reducers in a single reducer class.
 
 ## What's new
+### New in 0.31.0 (Not yet released)
+	- Remove White=Positive / Black=Negative terms - Use Include/Exclude instead.
+### New in 0.30.0
+	- Added a new class `MultiActionReducer<TState>` that allows you to combine multiple reducers into a single class.
 ### New in 0.29.0
  - Fixed a harmless null reference error when running server-side
  - Fixed FlightFinder sampl's UI and binding
@@ -144,3 +149,4 @@ MIT
    [Custom Middleware]: <https://github.com/mrpmorris/blazor-fluxor/tree/master/samples/04-MiddlewareSample>
    [Sample projects]: <https://github.com/mrpmorris/blazor-fluxor/tree/master/samples>
    [Blazor Flight Finder]: <https://github.com/mrpmorris/blazor-fluxor/tree/master/samples/05-FlightFinder>
+   [MultiActionReducer sample]: <https://github.com/mrpmorris/blazor-fluxor/tree/master/samples/06-MultiActionReducerSample>
